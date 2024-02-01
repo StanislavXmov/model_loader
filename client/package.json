@@ -17,6 +17,7 @@
     "r3f-perf": "7.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.50.0",
     "three": "0.151.3",
     "vite-plugin-svgr": "^4.2.0",
     "zustand": "4.4.6"

@@ -1,7 +1,16 @@
+import { Suspense, useState } from "react";
+import Form from "./components/Form";
+import Scene from "./components/Scene";
 
 const App = () => {
+  const [url, setUrl] = useState<string | null>(null);
   return (
-    <div className="bg-red-400">App</div>
+    <div className="bg-slate-300 h-full">
+      <Form setUrl={setUrl} />
+      <Suspense>
+        {url && <Scene url={url} />}
+      </Suspense>
+    </div>
   );
 };
 
