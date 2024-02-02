@@ -26,11 +26,12 @@ const View = ({url}: {url: string}) => {
         setIsPreview(false);
         setPreview(file);
 
-        const path = URL.createObjectURL(file);
-        const link = document.createElement('a');
-        link.setAttribute('download', `${name}_preview.png`);
-        link.setAttribute('href', path);
-        link.click();
+        // test preview
+        // const path = URL.createObjectURL(file);
+        // const link = document.createElement('a');
+        // link.setAttribute('download', `${name}_preview.png`);
+        // link.setAttribute('href', path);
+        // link.click();
       }
     }, 'image/png');
   }

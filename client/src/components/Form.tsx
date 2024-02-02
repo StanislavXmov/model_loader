@@ -34,6 +34,23 @@ const Form = ({setUrl}: {setUrl: (url: string) => void}) => {
     setIsPreview(true);
   }
 
+  const submitModel = async () => {
+    if (model && name && preview) {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('model', model);
+      formData.append('preview', preview);
+      
+      const res = await fetch('/upload', {
+        method: 'POST',
+        body: formData
+      });
+      console.log(res);
+      
+    }
+    
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} >
@@ -44,13 +61,14 @@ const Form = ({setUrl}: {setUrl: (url: string) => void}) => {
           id="model" 
         />
         <input
-          {...register('name')}
+          {...register('name', {required: true})}
           type="text"
           name="name"
           id="name"
         />
         {!model && <button type="submit">Load model</button>}
-        {model && <button onClick={setPreview} type="button">Set preview</button>}
+        {model && !preview && <button onClick={setPreview} type="button">Set preview</button>}
+        {model && preview && <button onClick={submitModel} type="button">Submit model</button>}
       </form>
     </div>
   );
