@@ -1,14 +1,15 @@
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
-import { GLTF } from 'three/examples/jsm/Addons.js';
+// import { GLTF } from 'three/examples/jsm/Addons.js';
 import { useModelStore } from '../store/useModelStore';
 import { GridHelper } from 'three';
 
-interface Model3d extends GLTF {
-  nodes: any;
-  materials: any;
-}
+// type by nodes & material
+// interface Model3d extends GLTF {
+//   nodes: any;
+//   materials: any;
+// }
 
 const View = ({url}: {url: string}) => {
 
@@ -20,7 +21,10 @@ const View = ({url}: {url: string}) => {
   const gridRef = useRef<GridHelper>(null);
 
   const gl = useThree((state) => state.gl);
-  const {nodes, materials} = useGLTF(url) as unknown as Model3d;
+  // by nodes & material
+  // const {nodes, materials} = useGLTF(url) as unknown as Model3d;
+  // console.log(nodes, materials);
+  const model = useGLTF(url);  
   
   const setScreenshot = async () => {
     if (gridRef.current) {
@@ -63,16 +67,18 @@ const View = ({url}: {url: string}) => {
       <pointLight position={[10, 10, 10]} />
       <gridHelper ref={gridRef} />
       <group>
-        <mesh 
+        {/* by nodes & material */}
+        {/* <mesh 
           castShadow 
           receiveShadow 
           geometry={nodes['collider'].geometry} 
           material={materials[""]} 
-        />
+        /> */}
+        <primitive object={model.scene} />
       </group>
       <OrbitControls />
     </>
-  )
+  );
 }
 
 export default View;

@@ -15,7 +15,7 @@ const Form = ({setUrl}: {setUrl: (url: string) => void}) => {
   const model = useModelStore(s => s.model);
   const preview = useModelStore(s => s.preview);
   const name = useModelStore(s => s.name);
-  console.log({name, model, preview});
+  // console.log({name, model, preview});
   const setModel = useModelStore(s => s.setModel);
   const setName = useModelStore(s => s.setName);
   const setIsPreview = useModelStore(s => s.setIsPreview);
