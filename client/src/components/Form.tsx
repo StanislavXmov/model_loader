@@ -6,10 +6,11 @@ type FormInputs = {
   name: string;
 };
 
-const Form = ({setUrl}: {setUrl: (url: string) => void}) => {
+const Form = ({setUrl}: {setUrl: (url: string | null) => void}) => {
   const {
     register,
     handleSubmit,
+    reset,
   } = useForm<FormInputs>();
 
   const model = useModelStore(s => s.model);
@@ -19,10 +20,11 @@ const Form = ({setUrl}: {setUrl: (url: string) => void}) => {
   const setModel = useModelStore(s => s.setModel);
   const setName = useModelStore(s => s.setName);
   const setIsPreview = useModelStore(s => s.setIsPreview);
+  const resetStore = useModelStore(s => s.resetStore);
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    console.log('name:', data.name);
-    console.log('model:', data.model[0]);
+    // console.log('name:', data.name);
+    // console.log('model:', data.model[0]);
 
     setModel(data.model[0]);
     setName(data.name);
@@ -46,9 +48,16 @@ const Form = ({setUrl}: {setUrl: (url: string) => void}) => {
         body: formData
       });
       console.log(res);
-      
+      reset();
+      resetStore();
+      setUrl(null);
     }
-    
+  }
+
+  const resetHandler = () => {
+    reset();
+    resetStore();
+    setUrl(null);
   }
 
   return (
@@ -94,6 +103,13 @@ const Form = ({setUrl}: {setUrl: (url: string) => void}) => {
             Submit model
           </button>
         )}
+        <button 
+            onClick={resetHandler} 
+            type="button"
+            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+        >
+          Reset
+        </button>
       </form>
     </div>
   );

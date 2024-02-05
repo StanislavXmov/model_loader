@@ -10,6 +10,7 @@ type ModelState = {
   setModel: (f: File) => void;
   setPreview: (f: File) => void;
   setIsPreview: (b: boolean) => void;
+  resetStore: () => void;
 }
 
 export const useModelStore = create<ModelState>()(subscribeWithSelector((set) => ({
@@ -21,4 +22,5 @@ export const useModelStore = create<ModelState>()(subscribeWithSelector((set) =>
   setModel: (f) => set(() => ({model: f})),
   setPreview: (f) => set(() => ({preview: f})),
   setIsPreview: (b) => set(() => ({isPreview: b})),
+  resetStore: () => set(() => ({model: null, name: null, preview: null})),
 })));
