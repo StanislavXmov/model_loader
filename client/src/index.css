@@ -5,3 +5,13 @@
 #root {
   height: 100vh;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgb(17 24 39 / var(--tw-text-opacity));
+    transition: background-color 5000s ease-in-out 0s;
+    background: rgb(249 250 251 / var(--tw-bg-opacity));
+}
